@@ -24,6 +24,7 @@ func main() {
 		return c.Status(200).JSON(fiber.Map{"msg": "hello world"})
 	})
 
+	// Create a Todo
 	app.Post("/api/todos", func(c *fiber.Ctx) error {
 		todo := &Todo{} // {id:0, completed:false, body:""}
 
@@ -38,7 +39,14 @@ func main() {
 		todo.ID = len(todos) + 1
 		todos = append(todos, *todo)
 
+		// var x int = 5 // 0x00001
+		// var p *int = &x	// 0x00001
+
+		// fmt.Println(p)	// 0x00001
+		// fmt.Println(*p) // 5
+
 		return c.Status(201).JSON(todo)
 	})
+
 	log.Fatal(app.Listen(":4000"))
 }
