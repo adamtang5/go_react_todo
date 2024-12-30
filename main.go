@@ -62,5 +62,10 @@ func main() {
 		return c.Status(404).JSON(fiber.Map{"error": "Todo not found"})
 	})
 
+	// Delete a Todo
+	app.Delete("/api/todos/:id", func(c *fiber.Ctx) error {
+		id := c.Params("id")
+	})
+
 	log.Fatal(app.Listen(":4000"))
 }
