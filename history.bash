@@ -11,3 +11,6 @@ go install github.com/air-verse/air@latest
 # run air server with hot updates
 air -c .air.toml
 air
+
+# install godotenv
+go get github.com/joho/godotenv
