@@ -14,3 +14,6 @@ air
 
 # install godotenv
 go get github.com/joho/godotenv
+
+# install mongodb driver
+go get go.mongodb.org/mongo-driver/mongo
