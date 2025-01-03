@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -42,18 +43,32 @@ func main() {
 
 	fmt.Println("Connected to MONGODB ATLAS")
 
-	// PORT := os.Getenv(("PORT"))
+	collection = client.Database("todo_db").Collection("todos")
 
-	// app := fiber.New()
+	app := fiber.New()
+	port := os.Getenv(("PORT"))
+	if port == "" {
+		port = "4000"
+	}
+
+	// Get all Todos
+	app.Get("/api/todos", getTodos)
+
+	// Create a Todo
+	app.Post("/api/todos", createTodo)
+
+	// Update a Todo
+	app.Patch("/api/todos/:id", updateTodo)
+
+	// Delete a Todo
+	app.Delete("/api/todos/:id", deleteTodo)
 
 	// todos := []Todo{}
 
-	// // Get all Todos
 	// app.Get("/api/todos", func(c *fiber.Ctx) error {
 	// 	return c.Status(200).JSON(todos)
 	// })
 
-	// // Create a Todo
 	// app.Post("/api/todos", func(c *fiber.Ctx) error {
 	// 	todo := &Todo{} // {id:0, completed:false, body:""}
 
@@ -77,7 +92,6 @@ func main() {
 	// 	return c.Status(201).JSON(todo)
 	// })
 
-	// // Update a Todo
 	// app.Patch("/api/todos/:id", func(c *fiber.Ctx) error {
 	// 	id := c.Params("id")
 
@@ -91,7 +105,6 @@ func main() {
 	// 	return c.Status(404).JSON(fiber.Map{"error": "Todo not found"})
 	// })
 
-	// // Delete a Todo
 	// app.Delete("/api/todos/:id", func(c *fiber.Ctx) error {
 	// 	id := c.Params("id")
 
@@ -105,5 +118,5 @@ func main() {
 	// 	return c.Status(404).JSON(fiber.Map{"error": "Todo not found"})
 	// })
 
-	// log.Fatal(app.Listen(":" + PORT))
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 }
