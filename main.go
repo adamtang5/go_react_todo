@@ -37,6 +37,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	defer client.Disconnect(context.Background())
+
 	err = client.Ping(context.Background(), nil)
 	if err != nil {
 		log.Fatal(err)
@@ -56,19 +58,15 @@ func main() {
 	app.Get("/api/todos", getTodos)
 
 	// Create a Todo
-	app.Post("/api/todos", createTodo)
+	// app.Post("/api/todos", createTodo)
 
 	// Update a Todo
-	app.Patch("/api/todos/:id", updateTodo)
+	// app.Patch("/api/todos/:id", updateTodo)
 
 	// Delete a Todo
-	app.Delete("/api/todos/:id", deleteTodo)
+	// app.Delete("/api/todos/:id", deleteTodo)
 
 	// todos := []Todo{}
-
-	app.Get("/api/todos", func(c *fiber.Ctx) error {
-		return c.Status(200).JSON(todos)
-	})
 
 	// app.Post("/api/todos", func(c *fiber.Ctx) error {
 	// 	todo := &Todo{} // {id:0, completed:false, body:""}
