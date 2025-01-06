@@ -60,35 +60,10 @@ func main() {
 	app.Post("/api/todos", createTodo)
 
 	// Update a Todo
-	// app.Patch("/api/todos/:id", updateTodo)
+	app.Patch("/api/todos/:id", updateTodo)
 
 	// Delete a Todo
 	// app.Delete("/api/todos/:id", deleteTodo)
-
-	// todos := []Todo{}
-
-	// app.Post("/api/todos", func(c *fiber.Ctx) error {
-	// 	todo := &Todo{} // {id:0, completed:false, body:""}
-
-	// 	if err := c.BodyParser(todo); err != nil {
-	// 		return err
-	// 	}
-
-	// 	if todo.Body == "" {
-	// 		return c.Status(400).JSON(fiber.Map{"error": "Todo body is required"})
-	// 	}
-
-	// 	todo.ID = len(todos) + 1
-	// 	todos = append(todos, *todo)
-
-	// 	// var x int = 5 // 0x00001
-	// 	// var p *int = &x	// 0x00001
-
-	// 	// fmt.Println(p)	// 0x00001
-	// 	// fmt.Println(*p) // 5
-
-	// 	return c.Status(201).JSON(todo)
-	// })
 
 	// app.Patch("/api/todos/:id", func(c *fiber.Ctx) error {
 	// 	id := c.Params("id")
@@ -159,4 +134,23 @@ func createTodo(c *fiber.Ctx) error {
 	todo.ID = insertResult.InsertedID.(primitive.ObjectID)
 
 	return c.Status(201).JSON(todo)
+}
+
+func updateTodo(c *fiber.Ctx) error {
+	id := c.Params("id")
+	objectID, err := primitive.ObjectIDFromHex(id)
+
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid todo ID"})
+	}
+
+	filter := bson.M{"_id": objectID}
+	update := bson.M{"$set": bson.M{"completed": true}}
+
+	_, err = collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		return err
+	}
+
+	return c.Status(200).JSON(fiber.Map{"success": true})
 }
