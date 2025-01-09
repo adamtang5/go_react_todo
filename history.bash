@@ -24,3 +24,6 @@ go get github.com/mattn/go-isatty@v0.0.20
 # in ./frontend folder
 npm create vite@latest .
 npm install
+
+# install chakra ui
+npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
