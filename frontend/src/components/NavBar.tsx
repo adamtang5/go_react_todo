@@ -1,4 +1,4 @@
-import { Box, Container, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Flex, useColorMode, useColorModeValue } from '@chakra-ui/react'
 
 function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -11,7 +11,17 @@ function NavBar() {
         my={4}
         borderRadius="5"
       >
-
+        <Flex
+          justifyContent="center"
+          alignItems="center"
+          gap={3}
+          display={{
+            base: "none",
+            sm: "flex"
+          }}
+        >
+          
+        </Flex>
       </Box>
     </Container>
   )
