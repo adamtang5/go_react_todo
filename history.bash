@@ -27,3 +27,6 @@ npm install
 
 # install chakra ui
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+
+# install react icons
+npm i react-icons
