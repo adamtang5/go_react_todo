@@ -26,7 +26,7 @@ npm create vite@latest .
 npm install
 
 # install chakra ui
-npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion
 
 # install react icons
 npm i react-icons
