@@ -1,4 +1,6 @@
-import { Box, Container, Flex, Text, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Text, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { IoMoon } from 'react-icons/io5'
+import { LuSun } from 'react-icons/lu'
 
 function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -28,7 +30,12 @@ function NavBar() {
             <img src="/explode.png" alt="logo" width={50} height={50} />
           </Flex>
 
-          
+          <Flex alignItems="center" gap={3}>
+            <Text fontSize="lg" fontWeight={500}>Daily Tasks</Text>
+            <Button onClick={toggleColorMode}>
+              {colorMode === "light" ? <IoMoon /> : <LuSun size={20} />}
+            </Button>
+          </Flex>
         </Flex>
       </Box>
     </Container>
