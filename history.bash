@@ -20,3 +20,7 @@ go get go.mongodb.org/mongo-driver/mongo
 
 # fix missing package
 go get github.com/mattn/go-isatty@v0.0.20
+
+# in ./frontend folder
+npm create vite@latest .
+npm install
