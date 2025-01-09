@@ -1,12 +1,13 @@
 import { Container, Stack } from '@chakra-ui/react'
+import NavBar from './components/NavBar'
 
 function App() {
   return (
     <Stack h="100vh">
       <NavBar />
       <Container>
-        <TodoForm />
-        <TodoList />
+        {/* <TodoForm />
+        <TodoList /> */}
       </Container>
     </Stack>
   )
