@@ -1,4 +1,4 @@
-import { Box, Container, Flex, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Flex, Text, useColorMode, useColorModeValue } from '@chakra-ui/react'
 
 function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -20,7 +20,11 @@ function NavBar() {
             sm: "flex"
           }}
         >
-          
+          <img src="/react.png" alt="logo" width={50} height={50} />
+          <Text fontSize="40">+</Text>
+          <img src="/go.png" alt="logo" width={40} height={40} />
+          <Text fontSize="40">=</Text>
+          <img src="/explode.png" alt="logo" width={50} height={50} />
         </Flex>
       </Box>
     </Container>
