@@ -35,6 +35,8 @@ function TodoList() {
         fontWeight="bold"
         textAlign="center"
         my={2}
+        bgGradient="linear(to-l, #0b85f8, #00ffff)"
+        bgClip="text"
       >
         Today's Tasks
       </Text>
