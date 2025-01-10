@@ -2,30 +2,14 @@ import { Flex, Image, Spinner, Stack, Text } from "@chakra-ui/react"
 import { useState } from "react"
 import TodoItem from "./TodoItem"
 
+export type Todo = {
+  _id: number
+  body: string
+  completed: boolean
+}
+
 function TodoList() {
   const [isLoading, setIsLoading] = useState(false)
-  const todos = [
-    {
-      _id: 1,
-      body: "Buy groceries",
-      completed: true,
-    },
-    {
-      _id: 2,
-      body: "Walk the dog",
-      completed: false,
-    },
-    {
-      _id: 3,
-      body: "Do laundry",
-      completed: false,
-    },
-    {
-      _id: 4,
-      body: "Cook dinner",
-      completed: true,
-    },
-  ]
 
   return (
     <>
