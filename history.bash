@@ -30,3 +30,6 @@ npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion
 
 # install react icons
 npm i react-icons
+
+# install tanstack query
+npm i @tanstack/react-query
