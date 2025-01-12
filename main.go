@@ -60,7 +60,7 @@ func main() {
 		port = "4000"
 	}
 
-	if os.Getenv("ENV") == "production" {
+	if os.Getenv("RAILWAY_ENVIRONMENT_NAME") == "production" {
 		app.Static("/", "./frontend/dist")
 	}
 
