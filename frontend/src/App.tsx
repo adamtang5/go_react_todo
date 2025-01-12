@@ -3,7 +3,9 @@ import NavBar from './components/NavBar'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 
-export const BASE_URL = "http://localhost:4000/api"
+export const BASE_URL = import.meta.env.MODE === "development"
+  ? "http://localhost:4000/api"
+  : "/api"
 
 function App() {
   return (
