@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Text } from "@chakra-ui/react"
+import { Badge, Box, Flex, Spinner, Text } from "@chakra-ui/react"
 import { FaCheckCircle } from "react-icons/fa"
 import { MdDelete } from "react-icons/md"
 import { Todo } from "./TodoList"
@@ -19,7 +19,7 @@ function TodoItem({ todo }: { todo: Todo }) {
           })
           const data = await res.json()
           if (!res.ok) {
-            throw new Error(data.console.error || "Something went wrong")
+            throw new Error(data.error || "Something went wrong")
           }
           return data
         } catch (err) {
@@ -30,6 +30,28 @@ function TodoItem({ todo }: { todo: Todo }) {
       queryClient.invalidateQueries({ queryKey: ["todos"] })
     },
   })
+
+  const { mutate: deleteTodo, isPending: isDeleting } = useMutation({
+    mutationKey: ["deleteTodo"],
+    mutationFn: async () => {
+      try {
+        const res = await fetch(BASE_URL + `/todos/${todo._id}`, {
+          method: "DELETE"
+        })
+        const data = await res.json()
+        if (!res.ok) {
+          throw new Error(data.error || "Something went wrong")
+        }
+        return data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] })
+    },
+  })
+
   return (
     <Flex gap={2} alignItems="center">
       <Flex
@@ -55,11 +77,16 @@ function TodoItem({ todo }: { todo: Todo }) {
 
       <Flex gap={2} alignItems="center">
         <Box color="green.500" cursor="pointer" onClick={() => updateTodo()}>
-          {!isUpdating && <FaCheckCircle size={20} />}
+          {isUpdating
+            ? <Spinner size="sm" />
+            : <FaCheckCircle size={20} />}
           
         </Box>
-        <Box color="red.500" cursor="pointer">
-          <MdDelete size={25} />
+        <Box color="red.500" cursor="pointer" onClick={() => deleteTodo()}>
+          {isDeleting
+            ? <Spinner size="sm" />
+            : <MdDelete size={25} />}
+          
         </Box>
       </Flex>
     </Flex>
