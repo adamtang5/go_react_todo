@@ -23,7 +23,7 @@ type Todo struct {
 var collection *mongo.Collection
 
 func main() {
-	if os.Getenv("ENV") != "production" {
+	if os.Getenv("RAILWAY_ENVIRONMENT_NAME") != "production" {
 		err := godotenv.Load(".env")
 		if err != nil {
 			log.Fatal("Error loading .env file", err)
